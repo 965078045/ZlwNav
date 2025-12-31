@@ -1,5 +1,6 @@
 import GlassCard from "./components/GlassCard";
-import SmartIcon from "./components/SmartIcon";
+import { SmartIcon } from "./components/SmartIcon";
+
 
 const App = () => {
   const themeMode: "light" | "dark" = "dark";
