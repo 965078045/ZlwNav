@@ -523,19 +523,16 @@ const App: React.FC = () => {
         </section>
 
 {/* 在 App.tsx 的 SearchBar 容器上方 */}
-<div className="w-full max-w-[900px] mb-4 flex items-end justify-between px-4">
-  {/* 左侧动态日志 */}
+<div className="w-full flex flex-col items-center mb-10">
+  {/* 名言组件 - 居中显示 */}
   <ConsoleLog />
   
-  {/* 右侧系统状态指示器 */}
-  <div className="flex items-center gap-2 mb-1">
-    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-    <span className={`text-[10px] font-mono uppercase tracking-widest ${isDark ? "text-white/40" : "text-slate-400"}`}>
-      System Active
-    </span>
-  </div>
+  {/* 装饰短线 */}
+  <div 
+    className="w-16 h-[2px] mt-4 opacity-30 rounded-full"
+    style={{ backgroundColor: 'var(--theme-primary)' }}
+  ></div>
 </div>
-
 
 <main className="w-full pb-20 relative z-[10] space-y-8">
   {visibleSubCategory ? (
