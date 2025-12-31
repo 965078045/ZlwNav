@@ -2,6 +2,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-card-enter {
+  /* 使用自定义缓动函数，让入场更丝滑 */
+  animation: card-enter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
 @keyframes fade-in-up {
   from {
     opacity: 0;
