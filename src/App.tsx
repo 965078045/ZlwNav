@@ -522,8 +522,6 @@ const App: React.FC = () => {
           <SearchBar themeMode={themeMode} />
         </section>
 
-// 这里仅展示 App.tsx 中 main 部分的关键渲染代码，其余逻辑保持不变
-// ... (之前的 state 和 useEffect 代码)
 
 <main className="w-full pb-20 relative z-[10] space-y-8">
   {visibleSubCategory ? (
@@ -601,7 +599,7 @@ const App: React.FC = () => {
   )}
 </main>
 
-// ... (其余部分代码保持不变)
+
       </div>
 
       <SyncIndicator />
