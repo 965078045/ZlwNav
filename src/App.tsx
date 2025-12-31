@@ -51,7 +51,12 @@ const App: React.FC = () => {
   const navTrackRef = useRef<HTMLDivElement>(null);
 
   const isFirstRender = useRef(true);
-
+  const hexToRgb = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
+  };
   // Initial Data Fetch
   useEffect(() => {
     const initData = async () => {
@@ -91,7 +96,18 @@ const App: React.FC = () => {
 
     initData();
   }, []);
+  useEffect(() => {
+  // 设置原始颜色变量
+  document.documentElement.style.setProperty("--theme-primary", themeColor);
 
+  // --- 新增：设置 RGB 分量变量，供 GlassCard 的 rgba() 使用 ---
+  document.documentElement.style.setProperty("--theme-primary-rgb", hexToRgb(themeColor));
+
+  document.documentElement.style.setProperty(
+    "--theme-hover",
+    `color-mix(in srgb, ${themeColor}, black 10%)`
+  );
+}, [themeColor]);
   // 确保 CSS 实时同步
   useEffect(() => {
     document.documentElement.style.setProperty("--theme-primary", themeColor);
