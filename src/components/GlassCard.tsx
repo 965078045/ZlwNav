@@ -7,7 +7,7 @@ interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   hoverEffect?: boolean;
   opacity?: number;
   themeMode?: ThemeMode;
-  variant?: "grid" | "row"; // ⭐ 新增
+  variant?: "grid" | "row";
 }
 
 const GlassCard: React.FC<GlassCardProps> = ({
@@ -56,11 +56,7 @@ const GlassCard: React.FC<GlassCardProps> = ({
       {/* hover 光效 */}
       {hoverEffect && (
         <div
-          className="
-            pointer-events-none absolute inset-0
-            opacity-0 group-hover:opacity-100
-            transition-opacity duration-300
-          "
+          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{
             background: isDark
               ? "radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 60%)"
@@ -69,10 +65,10 @@ const GlassCard: React.FC<GlassCardProps> = ({
         />
       )}
 
-      {/* 内容 */}
+      {/* 内容（⚠️ 这里必须能接收事件） */}
       <div
         className={`
-          relative z-10 w-full h-full pointer-events-none
+          relative z-10 w-full h-full
           ${isRow
             ? "flex flex-row items-center gap-4 justify-start"
             : "flex flex-col items-center justify-center"}
