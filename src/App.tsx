@@ -51,12 +51,7 @@ const App: React.FC = () => {
   const navTrackRef = useRef<HTMLDivElement>(null);
 
   const isFirstRender = useRef(true);
-  const hexToRgb = (hex: string) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `${r}, ${g}, ${b}`;
-  };
+
   // Initial Data Fetch
   useEffect(() => {
     const initData = async () => {
@@ -96,18 +91,7 @@ const App: React.FC = () => {
 
     initData();
   }, []);
-  useEffect(() => {
-  // 设置原始颜色变量
-  document.documentElement.style.setProperty("--theme-primary", themeColor);
 
-  // --- 新增：设置 RGB 分量变量，供 GlassCard 的 rgba() 使用 ---
-  document.documentElement.style.setProperty("--theme-primary-rgb", hexToRgb(themeColor));
-
-  document.documentElement.style.setProperty(
-    "--theme-hover",
-    `color-mix(in srgb, ${themeColor}, black 10%)`
-  );
-}, [themeColor]);
   // 确保 CSS 实时同步
   useEffect(() => {
     document.documentElement.style.setProperty("--theme-primary", themeColor);
@@ -576,7 +560,12 @@ const App: React.FC = () => {
             onClick={() => window.open(link.url, "_blank")}
             // 修改为 h-20 且 padding 增加，内容水平排列
             className="h-20 flex flex-row items-center px-5 gap-5 group animate-card-enter"
-            style={{ animationFillMode: 'backwards' }}
+	   style={{ 
+      // index * 0.05 代表每个卡片间隔 50 毫秒依次弹出
+      animationDelay: `${index * 0.05}s`, 
+      // 必须加上 backwards，否则卡片在动画开始前会闪现一下
+      animationFillMode: 'backwards' 
+    }}
             title={`${link.title}\n${link.url}`}
           >
             {/* 图标容器：尺寸加大 50% (24px -> 36px) */}
