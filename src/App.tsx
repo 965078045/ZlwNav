@@ -551,54 +551,51 @@ const App: React.FC = () => {
         key={visibleSubCategory.id}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
       >
-        {visibleSubCategory.items.map((link) => (
-          <GlassCard
-            key={link.id}
-            hoverEffect={true}
-            opacity={cardOpacity}
-            themeMode={themeMode}
-            onClick={() => window.open(link.url, "_blank")}
-            // 修改为 h-20 且 padding 增加，内容水平排列
-            className="h-20 flex flex-row items-center px-5 gap-5 group animate-card-enter"
-	   style={{ 
-      // index * 0.05 代表每个卡片间隔 50 毫秒依次弹出
+       {visibleSubCategory.items.map((link, index) => (
+  <GlassCard
+    key={link.id}
+    hoverEffect={true}
+    opacity={cardOpacity}
+    themeMode={themeMode}
+    onClick={() => window.open(link.url, "_blank")}
+    className="h-20 flex flex-row items-center px-5 gap-5 group animate-card-enter"
+    style={{ 
+      // 现在 index 有定义了，动画可以正常计算
       animationDelay: `${index * 0.05}s`, 
-      // 必须加上 backwards，否则卡片在动画开始前会闪现一下
       animationFillMode: 'backwards' 
     }}
-            title={`${link.title}\n${link.url}`}
-          >
-            {/* 图标容器：尺寸加大 50% (24px -> 36px) */}
-            <div
-              className={`flex-shrink-0 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center h-9 w-9 ${
-                isDark ? "text-white/90" : "text-slate-700"
-              }`}
-            >
-              <SmartIcon 
-                icon={link.icon} 
-                size={36} 
-                imgClassName="w-9 h-9 object-contain drop-shadow-md rounded-lg"
-              />
-            </div>
+    title={`${link.title}\n${link.url}`}
+  >
+    {/* 图标容器 */}
+    <div
+      className={`flex-shrink-0 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center h-9 w-9 ${
+        isDark ? "text-white/90" : "text-slate-700"
+      }`}
+    >
+      <SmartIcon 
+        icon={link.icon} 
+        size={36} 
+        imgClassName="w-9 h-9 object-contain drop-shadow-md rounded-lg"
+      />
+    </div>
 
-            {/* 文字容器：靠左对齐，字号加大 */}
-            <div className="flex flex-col items-start overflow-hidden">
-              <span
-                className={`text-[16px] font-bold truncate w-full transition-colors duration-300 ${
-                  isDark ? "text-white group-hover:text-[var(--theme-primary)]" : "text-slate-800"
-                }`}
-              >
-                {link.title}
-              </span>
-              {/* 可选：显示描述信息 */}
-              {link.description && (
-                <span className={`text-[11px] truncate w-full opacity-50 ${isDark ? "text-white/60" : "text-slate-500"}`}>
-                  {link.description}
-                </span>
-              )}
-            </div>
-          </GlassCard>
-        ))}
+    {/* 文字容器 */}
+    <div className="flex flex-col items-start overflow-hidden">
+      <span
+        className={`text-[16px] font-bold truncate w-full transition-colors duration-300 ${
+          isDark ? "text-white group-hover:text-[var(--theme-primary)]" : "text-slate-800"
+        }`}
+      >
+        {link.title}
+      </span>
+      {link.description && (
+        <span className={`text-[11px] truncate w-full opacity-50 ${isDark ? "text-white/60" : "text-slate-500"}`}>
+          {link.description}
+        </span>
+      )}
+    </div>
+  </GlassCard>
+))}
       </div>
 
       {visibleSubCategory.items.length === 0 && (
