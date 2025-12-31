@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import * as Icons from "lucide-react";
 import { SmartIcon } from "./components/SmartIcon";
-
+import { ConsoleLog } from "./components/ConsoleLog";
 import { SearchBar } from "./components/SearchBar";
 import { GlassCard } from "./components/GlassCard";
 import { LinkManagerModal } from "./components/LinkManagerModal";
